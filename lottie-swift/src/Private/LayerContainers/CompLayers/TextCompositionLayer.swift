@@ -116,9 +116,12 @@ final class TextCompositionLayer: CompositionLayer {
     
     let textString = textProvider.textFor(keypathName: self.keypathName, sourceText: text.text)
     
+    let defaultFont = UIFont(name: text.fontFamily, size: CGFloat(text.fontSize))
+    let font = textProvider.customFontFor(keypathName: self.keypathName, sourceFontName: text.fontFamily, size: text.fontSize) ?? defaultFont
+    
     // TODO Fix Line hegith.
     var attributes: [NSAttributedString.Key : Any] = [
-      NSAttributedString.Key.font: ctFont,
+      NSAttributedString.Key.font: font ?? ctFont,
       NSAttributedString.Key.foregroundColor: fillColor,
       NSAttributedString.Key.kern: tracking,
     ]
